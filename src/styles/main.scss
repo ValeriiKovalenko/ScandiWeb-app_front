@@ -1,0 +1,65 @@
+@import './base/normalize.scss';
+@font-face {
+    font-family: "Raleway-light";
+    src: url(../fonts/Raleway/static/Raleway-Light.ttf);
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Raleway-regular";
+    src: url(../fonts/Raleway/static/Raleway-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Raleway-medium";
+    src: url(../fonts/Raleway/static/Raleway-Medium.ttf);
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Raleway-semi-bold";
+    src: url(../fonts/Raleway/static/Raleway-SemiBold.ttf);
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Raleway-bold";
+    src: url(../fonts/Raleway/static/Raleway-Bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto-bold";
+    src: url(../fonts/Roboto/Roboto-Bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Source-Sans-regular";
+    src: url(../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto-Condensed-bold";
+    src: url(../fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+
+@import '../components/AppBar/AppBar.scss';
+@import '../components/AppBar/NavBar/NavBar.scss';
+@import '../components/AppBar/UserBar/Cart/Cart.scss';
+@import '../components/AppBar/UserBar/CurrencyPicker/CurrencyPicker.scss';
+@import '../pages/Products/Products.scss';
+@import '../pages/ItemPage/itemPage.scss';
+@import '../components/ProductList/ProductList.scss';
+@import '../components/ProductItem/ProductItem.scss';
+@import '../components/AppBar/UserBar/Cart/TechControler/swatch.scss';
+@import '../components/AppBar/UserBar/Cart/TechControler/text.scss';

@@ -1,0 +1,32 @@
+.navList {
+    display: flex;
+    justify-content: space-around;
+    width: 234px;
+    font-family: "Raleway-regular", sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+
+
+    a {
+        transition: .5s;
+        position: relative;
+        
+    }
+    .active-link {
+        font-family: "Raleway-semi-bold",
+        sans-serif;
+        color: #5ECE7B;
+    }
+    .active-link:after {
+        content: "";
+        width: 140%;
+        height: 2px;
+        background-color: #5ECE7B;
+        position: absolute;
+        display: block;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
