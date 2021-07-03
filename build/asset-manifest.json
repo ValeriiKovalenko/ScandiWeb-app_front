@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "./static/css/main.4cc1d8b8.chunk.css",
+    "main.js": "./static/js/main.94ed33bd.chunk.js",
+    "main.js.map": "./static/js/main.94ed33bd.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.4347aa80.js",
+    "runtime-main.js.map": "./static/js/runtime-main.4347aa80.js.map",
+    "static/css/2.01f94b54.chunk.css": "./static/css/2.01f94b54.chunk.css",
+    "static/js/2.79407443.chunk.js": "./static/js/2.79407443.chunk.js",
+    "static/js/2.79407443.chunk.js.map": "./static/js/2.79407443.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.01f94b54.chunk.css.map": "./static/css/2.01f94b54.chunk.css.map",
+    "static/css/main.4cc1d8b8.chunk.css.map": "./static/css/main.4cc1d8b8.chunk.css.map",
+    "static/js/2.79407443.chunk.js.LICENSE.txt": "./static/js/2.79407443.chunk.js.LICENSE.txt",
+    "static/media/material-icons.css": "./static/media/MaterialIcons-Regular.cff684e5.woff2",
+    "static/media/main.scss": "./static/media/arrow-right.e684cb98.svg",
+    "static/media/a-logo.e2b3f410.svg": "./static/media/a-logo.e2b3f410.svg",
+    "static/media/arrow-down.766d7b11.svg": "./static/media/arrow-down.766d7b11.svg",
+    "static/media/cart.e425fd9b.svg": "./static/media/cart.e425fd9b.svg",
+    "static/media/emptyCart.e4a558c4.svg": "./static/media/emptyCart.e4a558c4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4347aa80.js",
+    "static/css/2.01f94b54.chunk.css",
+    "static/js/2.79407443.chunk.js",
+    "static/css/main.4cc1d8b8.chunk.css",
+    "static/js/main.94ed33bd.chunk.js"
+  ]
+}

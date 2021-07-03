@@ -1,0 +1,32 @@
+.cart__item-gallery {
+    position: relative;
+
+    &-btn {
+        width: 24px;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-position: center;
+        border: none;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        cursor: pointer;
+transition: .5s;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.233);
+        }
+
+    }
+
+    &-btn.left {
+        background-image: url('../../icons/arrow-left.svg');
+        left: 0;
+    }
+
+    &-btn.right {
+        background-image: url('../../icons/arrow-right.svg');
+        right: 0;
+    }
+
+}

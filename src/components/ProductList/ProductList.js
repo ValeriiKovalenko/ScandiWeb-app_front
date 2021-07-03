@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { getAllItems } from "../../API/itemsControler";
 import ProductItem from "../ProductItem/ProductItem";
 import { v4 as uuid } from "uuid";
@@ -30,5 +31,11 @@ class ProductList extends Component {
       </ul>
     );
   }
+}
+
+
+ProductList.propTypes = {
+    category: PropTypes.string.isRequired,
+    from: PropTypes.string.isRequired
 }
 export default ProductList;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import ProductList from '../../components/ProductList/ProductList';
 import { withRouter } from 'react-router-dom';
 
@@ -14,5 +15,10 @@ import { withRouter } from 'react-router-dom';
         );
     }
  }
+
+ Products.propTypes = {
+   category: PropTypes.string.isRequired,
+   location: PropTypes.object
+ };
 
 export default withRouter(Products);

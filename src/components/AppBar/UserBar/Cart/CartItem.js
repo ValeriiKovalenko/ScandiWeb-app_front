@@ -1,18 +1,31 @@
 import React, { Component } from "react";
-import SizeControler from "./SizeControler";
+import PropTypes from "prop-types";
+import SizeControler from "./SizeControler/SizeControler";
 import TechControler from "./TechControler/TechControler";
-import store from '../../../../store/store';
-import addToCartHandler from '../../../../store/actionCreators/addToCartHandler';
+import store from "../../../../store/store";
+import addToCartHandler from "../../../../store/actionCreators/addToCartHandler";
+import removeFromCartHandler from "../../../../store/actionCreators/removeFromCartHandler";
+import attributesHandler from "../../../../store/actionCreators/attributesHandler";
 
 class CartItem extends Component {
-
-
-
-
+  state = {
+    name: this.props.data.name,
+    attributesValue: {},
+  };
 
   addMoreItems = () => {
+    store.dispatch(addToCartHandler({ ...this.props.data }));
+  };
+  takeOneFromCart = () => {
+    store.dispatch(removeFromCartHandler({ ...this.props.data }));
+  };
+  getAttributesValue = (name, value) => {
     store.dispatch(
-      addToCartHandler({ ...this.props.data })
+      attributesHandler({
+        itemName: this.props.data.name,
+        attributeName: name,
+        value,
+      })
     );
   };
   render() {
@@ -23,24 +36,39 @@ class CartItem extends Component {
       attributes,
       currency,
       category,
-        quantity,
-      totalPrice
+      quantity,
+      totalPrice,
+      Color,
+        Size,
+      Capacity
     } = this.props.data;
-      const { addMoreItems } = this;
+    const { addMoreItems, takeOneFromCart, getAttributesValue } = this;
     return (
       <li className="cart__item">
         <div className="cart__item-info">
           <h4 className="cart__item-title">{name}</h4>
           <span>
             {currency}
-            {totalPrice ? totalPrice.toFixed(2) : fullPrice}
+            {totalPrice || fullPrice}
           </span>
 
           {category === "clothes" && (
-            <SizeControler attributes={attributes} itemName={name} />
+            <SizeControler
+              userSize={Size}
+              attributes={attributes}
+              itemName={name}
+              getAttributesValue={getAttributesValue}
+              miniCart={true}
+            />
           )}
           {category === "tech" && (
-            <TechControler attributes={attributes} itemName={name} />
+            <TechControler
+              attributes={attributes}
+              itemName={name}
+              getAttributesValue={getAttributesValue}
+              Color={Color}
+              Capacity={Capacity}
+            />
           )}
         </div>
         <div className="cart__item-quantity">
@@ -52,16 +80,24 @@ class CartItem extends Component {
             <span></span>
           </button>
           <span>{quantity}</span>
-          <button className="cart__item-quantity__btn minus" type="button">
+          <button
+            onClick={takeOneFromCart}
+            className="cart__item-quantity__btn minus"
+            type="button"
+          >
             <span></span>
           </button>
         </div>
         <div className="cart__item-img">
-          <img width="30" src={gallery[0]} alt="" />
+          <img width="30" src={gallery?.[0]} alt="" />
         </div>
       </li>
     );
   }
+}
+
+CartItem.protoTypes = {
+    data: PropTypes.object.isRequired
 }
 
 export default CartItem;

@@ -2,76 +2,163 @@ import React, { Component } from "react";
 import { getAllItems } from "../../API/itemsControler";
 import store from "../../store/store";
 import { v4 as uuid } from "uuid";
-import SizeControler from "../../components/AppBar/UserBar/Cart/SizeControler";
+import Gallery from "../../components/Gallery/Gallery";
+import SizeControler from "../../components/AppBar/UserBar/Cart/SizeControler/SizeControler";
+import Swatch from "../../components/AppBar/UserBar/Cart/TechControler/Swatch/Swatch";
+import Text from "../../components/AppBar/UserBar/Cart/TechControler/Text/Text";
+import addToCartHandler from "../../store/actionCreators/addToCartHandler";
+import attributesHandler from "../../store/actionCreators/attributesHandler";
+
+// Notifications
+import { success } from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
+import "@pnotify/core/dist/Material.css";
+import { defaults } from "@pnotify/core";
+import "material-design-icons/iconfont/material-icons.css";
 
 class ItemPage extends Component {
   state = {
     item: {},
     itemName: "",
-    activeImg: "",
+    size: "",
+    price: "",
+    currency: "",
   };
-  componentDidMount() {
-    this.setState({
+  async componentDidMount() {
+    await this.setState({
       itemName: this.props.match.params.id.split("_").join(" "),
     });
-    getAllItems().then((data) => {
+
+    await getAllItems().then((data) => {
       const currentItem = data.find(
         (item) => item.name === this.state.itemName
       );
-      this.setState({ item: currentItem, activeImg: currentItem.gallery[0] });
+      this.setState({ item: currentItem });
     });
-  }
-  componentDidUpdate() {
-    console.log(this.state.item.gallery);
+    if (this.state.price === "") {
+      this.getPrice();
+    }
   }
 
-  openImage = (e) => {
-    const url = e.target.dataset.main;
-    this.setState({ activeImg: url });
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+
+  getPrice = () => {
+    const { prices } = this.state.item;
+    let currencyName = localStorage.getItem("currencyName");
+    const price = prices?.find((el) => el.currency === currencyName).amount;
+    const currencySymbol = localStorage.getItem("currency");
+    this.setState({ price, currency: currencySymbol });
+    store.subscribe(() => {
+      currencyName =
+        store.getState().currency.value.currencyName ||
+        localStorage.getItem("currencyName");
+      const currencySymbol = store.getState().currency.value.currency;
+      const price = prices?.find((el) => el.currency === currencyName).amount;
+
+      this.setState({ price, currency: currencySymbol });
+    });
+  };
+
+  getAttributesValue = (name, value) => {
+    store.dispatch(
+      attributesHandler({
+        itemName: this.state.itemName,
+        attributeName: name,
+        value,
+      })
+    );
+  };
+
+  addToCart = () => {
+    store.dispatch(
+      addToCartHandler({
+        ...this.state.item,
+        fullPrice: this.state.price,
+        currency: this.state.currency,
+      })
+    );
+    //   Notification
+    defaults.styling = "material";
+    defaults.icons = "material";
+    success({
+      title: `You put ${this.state.item.name} in your cart`,
+      animateSpeed: "fast",
+      delay: 1500,
+      sticker: false,
+    });
   };
 
   render() {
-    const { openImage } = this;
-    const { item, activeImg } = this.state;
-    const { name, gallery, attributes, fullPrice, totalPrice, currency } = item;
+    const { getSize, addToCart, getAttributesValue } = this;
+    const { item, price, currency, itemName } = this.state;
+    const { name, gallery, attributes, description } = item;
 
     return (
       <article className="itemPage">
-        <div className="itemPage__gallery">
-          {gallery?.map((img) => {
-            return (
-              <div key={uuid()} className="itemPage__gallery-box">
-                <img
-                  data-main={img}
-                  onClick={openImage}
-                  width="100"
-                  src={img}
-                  alt=""
-                />
-              </div>
-            );
-          })}
-        </div>
-        <div className="itemPage__main-img">
-          <img src={activeImg} alt="" />
-        </div>
+        <Gallery gallery={gallery} />
         <div className="itemPage__info">
-          <h2>{name}</h2>
+          <h2 className="itemPage__info-title">{name}</h2>
           {attributes?.map(({ name, type, items }) => {
             if (name === "Size") {
               return (
                 <div className="sizeBar" key={uuid()}>
                   <h3 className="itemPage__attribute-title">{name}:</h3>{" "}
                   <SizeControler
+                    getSize={getSize}
                     attributes={attributes}
                     itemName={name}
                     location="page"
+                    getAttributesValue={getAttributesValue}
                   />
                 </div>
               );
             }
+            if (name === "Color") {
+              return (
+                <div className="colorBar" key={uuid()}>
+                  <h3 className="itemPage__attribute-title">{name}:</h3>{" "}
+                  <Swatch data={items} id={uuid()} itemName={itemName} />
+                </div>
+              );
+            }
+            if (
+              name === "Capacity" ||
+              name === "With USB 3 ports" ||
+              name === "Touch ID in keyboard"
+            ) {
+              return (
+                <div className="settingsBar" key={uuid()}>
+                  <h3 className="itemPage__attribute-title">{name}:</h3>{" "}
+                  <Text
+                    key={uuid()}
+                    data={items}
+                    name={name}
+                    id={uuid()}
+                    itemName={itemName}
+                  />
+                </div>
+              );
+            }
+            return null;
           })}
-                <h3>{currency}</h3>
+          <h3 className="itemPage__info-price">
+            <span className="itemPage__info-price-title">Price:</span>
+            <span>
+              {currency}
+              {price}
+            </span>
+          </h3>
+          <button onClick={addToCart} className="itemPage__info-btn">
+            ADD TO CART
+          </button>
+          <div
+            className="itemPage__info-descr"
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></div>
         </div>
       </article>
     );

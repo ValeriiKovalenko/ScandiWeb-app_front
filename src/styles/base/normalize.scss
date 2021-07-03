@@ -93,6 +93,7 @@ hr {
     /* 2 */
 }
 
+
 /*
 Text-level semantics
 ====================
@@ -322,4 +323,7 @@ Add the correct display in Chrome and Safari.
 
 summary {
     display: list-item;
+}
+label {
+    cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LogoIcon from '../../icons/a-logo.svg';
+import {NavLink} from 'react-router-dom';
 
 const style = {
     position: "absolute",
@@ -12,6 +13,6 @@ const style = {
 export default class Logo extends Component {
 
     render() {
-        return <img style={style} src={LogoIcon} alt="Logo" />;
+        return <NavLink to={"/"}><img style={style} src={LogoIcon} alt="Logo" /></NavLink>;
     }
 }

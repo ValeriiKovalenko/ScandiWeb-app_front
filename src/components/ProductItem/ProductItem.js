@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import CartIcon from "../../icons/emptyCart.svg";
 
 import store from "../../store/store";
 
 import addToCartHandler from "../../store/actionCreators/addToCartHandler";
-import itemPageHandler from '../../store/actionCreators/itemPageHandler';
+import itemPageHandler from "../../store/actionCreators/itemPageHandler";
+
 
 // Notifications
 import { success } from "@pnotify/core";
@@ -13,7 +15,6 @@ import "@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/Material.css";
 import { defaults } from "@pnotify/core";
 import "material-design-icons/iconfont/material-icons.css";
-
 
 class ProductItem extends Component {
   state = {
@@ -37,38 +38,44 @@ class ProductItem extends Component {
     );
   }
 
-  componentDidUpdate(prevProps, prevState) {}
+
 
   addToCart = () => {
     const fullPrice = this.props.item.prices?.find(
       (el) => el.currency === this.state.currencyName
     ).amount;
-      const { currency } = this.state;
-      
+    const { currency } = this.state;
+
     store.dispatch(
       addToCartHandler({ ...this.props.item, fullPrice, currency })
     );
 
     //   Notification
-      defaults.styling = "material";
-      defaults.icons = "material";
-      success({
-        title: `You put ${this.props.item.name} in your cart`,
-     
-      });
-      
+    defaults.styling = "material";
+    defaults.icons = "material";
+    success({
+      title: `You put ${this.props.item.name} in your cart`,
+      animateSpeed: "fast",
+      delay: 1500,
+      sticker: false,
+    });
   };
-    putInStore = () => {
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+  putInStore = () => {
+    const fullPrice = this.props.item.prices?.find(
+      (el) => el.currency === this.state.currencyName
+    ).amount;
+    const { currency } = this.state;
+    store.dispatch(
+      itemPageHandler({ ...this.props.item, fullPrice, currency })
+    );
+  };
 
-         const fullPrice = this.props.item.prices?.find(
-           (el) => el.currency === this.state.currencyName
-         ).amount;
-         const { currency } = this.state;
-        store.dispatch(
-          itemPageHandler({ ...this.props.item, fullPrice, currency })
-        );
-        console.log(store.getState())
-    }
+
 
   render() {
     const { currency, currencyName } = this.state;
@@ -104,6 +111,11 @@ class ProductItem extends Component {
       </li>
     );
   }
+}
+
+ProductItem.propTypes = {
+    item: PropTypes.object.isRequired,
+    from: PropTypes.string.isRequired
 }
 
 export default ProductItem;
