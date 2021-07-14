@@ -1,13 +1,13 @@
-import itemPageChange from "../actions/itemPageChange";
+import itemPageChange from '../actions/itemPageChange'
 
-const initialState = "";
+const initialState = ''
 function reducer(state = initialState, action) {
-  switch (action.type) {
-    case itemPageChange:
-      return { value: action.value };
+    switch (action.type) {
+        case itemPageChange:
+            return { value: action.value }
 
-    default:
-      return state;
-  }
+        default:
+            return state
+    }
 }
-export default reducer;
+export default reducer

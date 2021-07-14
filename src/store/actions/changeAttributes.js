@@ -1,2 +1,2 @@
-const changeAttributes = "CHANGE_ATTRIBUTES";
-export default changeAttributes;
+const changeAttributes = 'CHANGE_ATTRIBUTES'
+export default changeAttributes

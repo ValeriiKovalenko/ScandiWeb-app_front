@@ -1,14 +1,13 @@
-import currencyChange from "../actions/currencyChange";
+import currencyChange from '../actions/currencyChange'
 
-const initialState = localStorage.getItem('currency') || "$";
+const initialState = localStorage.getItem('currency') || '$';
 function reducer(state = initialState, action) {
-  switch (action.type) {
-    case currencyChange:
+    switch (action.type) {
+        case currencyChange:
+            return { value: action.value }
 
-      return { value: action.value };
-
-    default:
-      return state;
-  }
+        default:
+            return state
+    }
 }
-export default reducer;
+export default reducer

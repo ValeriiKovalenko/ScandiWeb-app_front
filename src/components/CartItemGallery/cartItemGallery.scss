@@ -12,7 +12,8 @@
         background-color: transparent;
         background-repeat: no-repeat;
         cursor: pointer;
-transition: .5s;
+        transition: .5s;
+
         &:hover {
             background-color: rgba(0, 0, 0, 0.233);
         }

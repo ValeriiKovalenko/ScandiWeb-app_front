@@ -1,10 +1,10 @@
-import changeAttributes from '../actions/changeAttributes';
+import changeAttributes from '../actions/changeAttributes'
 
 function currencyHandler(value) {
-  return {
-    type: changeAttributes,
-    attributes: value,
-  };
+    return {
+        type: changeAttributes,
+        attributes: value,
+    }
 }
 
-export default currencyHandler;
+export default currencyHandler

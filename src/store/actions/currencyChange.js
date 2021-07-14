@@ -1,2 +1,2 @@
-const currencyChange = "currency was changed";
-export default currencyChange;
+const currencyChange = 'currency was changed'
+export default currencyChange

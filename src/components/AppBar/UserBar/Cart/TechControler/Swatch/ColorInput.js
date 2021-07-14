@@ -1,35 +1,35 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { v4 as uuid } from 'uuid'
 
- class ColorInput extends Component {
-     render() {
-         const  displayValue  = this.props.displayValue;
-         const value  = this.props.value
-         const { miniCart, getAttributesValue, itemName, id, color } = this.props.data;
-       
+class ColorInput extends PureComponent {
+    render() {
+        const { displayValue, value, userColor } = this.props
+
+        const { getAttributesValue, itemName, id } = this.props.data
+        const inputFor = uuid()
         return (
-          <>
-            <input
-              checked={color === value}
-              onChange={() => miniCart && getAttributesValue("Color", value)}
-              id={displayValue + id}
-              name={id+ itemName}
-              type="radio"
-              value={displayValue}
-            />
-            <label
-              style={{ backgroundColor: value }}
-              htmlFor={displayValue + id}
-            ></label>
-          </>
-        );
+            <>
+                <input
+                    checked={userColor === value}
+                    onChange={() => getAttributesValue('Color', value)}
+                    id={inputFor}
+                    name={id + itemName}
+                    type="radio"
+                    value={displayValue}
+                />
+                <label
+                    style={{ backgroundColor: value }}
+                    htmlFor={inputFor}
+                ></label>
+            </>
+        )
     }
- }
-
+}
 
 ColorInput.propTypes = {
-  displayValue: PropTypes.string.isRequired,
+    displayValue: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
-};
-export default ColorInput;
+    data: PropTypes.object.isRequired,
+}
+export default ColorInput

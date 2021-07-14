@@ -1,32 +1,35 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { PureComponent } from 'react'
+import { v4 as uuid } from 'uuid'
+import PropTypes from 'prop-types'
 
-class TextInput extends Component {
-  render() {
-    const value = this.props.value;
-    const userCapacity = this.props.userCapacity;
-    const { miniCart, getAttributesValue, itemName, id, name } =
-      this.props.data;
+class TextInput extends PureComponent {
+    render() {
+        const value = this.props.value
+        // const userCapacity = this.props.userCapacity;
+        const userAttributes = this.props.userAttributes
+        const { getAttributesValue, id, name } = this.props.data
 
-    return (
-      <>
-        <input
-          checked={userCapacity === value}
-          onChange={() => miniCart && getAttributesValue(name, value)}
-          id={value + id}
-          name={itemName + id}
-          type="radio"
-          value={value}
-        />
-        <label htmlFor={value + id}>{value}</label>
-      </>
-    );
-  }
+        const inputFor = uuid()
+
+        return (
+            <>
+                <input
+                    checked={userAttributes?.[name] === value}
+                    onChange={() => getAttributesValue(name, value)}
+                    id={inputFor}
+                    name={name + id}
+                    type="radio"
+                    value={value}
+                />
+                <label htmlFor={inputFor}>{value}</label>
+            </>
+        )
+    }
 }
 
 TextInput.propTypes = {
-  value: PropTypes.string.isRequired,
-  userCapacity: PropTypes.string,
-  data: PropTypes.object.isRequired,
-};
-export default TextInput;
+    value: PropTypes.string.isRequired,
+    userCapacity: PropTypes.string,
+    data: PropTypes.object.isRequired,
+}
+export default TextInput

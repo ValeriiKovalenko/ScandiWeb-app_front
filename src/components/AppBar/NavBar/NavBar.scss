@@ -1,7 +1,7 @@
 .navList {
     display: flex;
     justify-content: space-around;
-    width: 234px;
+    width: 160px;
     font-family: "Raleway-regular", sans-serif;
     font-size: 16px;
     line-height: 19px;
@@ -10,13 +10,15 @@
     a {
         transition: .5s;
         position: relative;
-        
+
     }
+
     .active-link {
         font-family: "Raleway-semi-bold",
-        sans-serif;
+            sans-serif;
         color: #5ECE7B;
     }
+
     .active-link:after {
         content: "";
         width: 140%;
@@ -29,4 +31,3 @@
         transform: translateX(-50%);
     }
 }
-

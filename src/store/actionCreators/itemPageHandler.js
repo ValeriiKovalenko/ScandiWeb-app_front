@@ -1,10 +1,10 @@
-import itemPageChange from '../actions/itemPageChange';
+import itemPageChange from '../actions/itemPageChange'
 
 function itemPageHandler(value) {
-  return {
-    type: itemPageChange,
-    value: value,
-  };
+    return {
+        type: itemPageChange,
+        value: value,
+    }
 }
 
-export default itemPageHandler;
+export default itemPageHandler

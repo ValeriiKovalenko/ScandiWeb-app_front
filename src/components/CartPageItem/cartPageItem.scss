@@ -6,9 +6,10 @@
     justify-content: space-between;
     align-items: center;
 
-&__info {
-    min-width: 350px;
-}
+    &__info {
+        min-width: 350px;
+    }
+
     &__name {
         font-family: "Raleway-semi-bold";
         font-weight: 600;
